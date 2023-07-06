@@ -31,3 +31,5 @@ uWSGI==2.0.21
 vine==5.0.0
 wcwidth==0.2.6
 Werkzeug==2.2.3
+redis==4.3.4
+requests==2.31.0

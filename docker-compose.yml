@@ -6,8 +6,8 @@ services:
     environment:
       - FLASK_APP=application.py
       - APP_SETTINGS=config.TestingConfig
-      - CELERY_BROKER_URL=redis://redis/0
-      - CELERY_BACKEND_URL=redis://redis/0
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_BACKEND_URL=redis://redis:6379/0
     volumes:
       - .:/src
     ports:
@@ -19,10 +19,10 @@ services:
       - 6379
   celery_worker:
     image: core:core
-    command: celery worker -A app.celery --loglevel=INFO
+    command: celery -A app.celery worker --loglevel=INFO
     environment:
-      - CELERY_BROKER_URL=redis://redis/0
-      - CELERY_BACKEND_URL=redis://redis/0
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_BACKEND_URL=redis://redis:6379/0
     volumes:
       - .:/src
     depends_on:
@@ -38,3 +38,4 @@ services:
     depends_on:
       - redis
       - celery_worker
+
